@@ -52,30 +52,31 @@ const regionY = chunkY >> 5
 ```
 
 ### File Header
-| Offset | Size (Bytes) | Field            | Purpose                                                            |
-|--------|--------------|------------------|--------------------------------------------------------------------|
-| 0x0    | 0x4          | Magic Number     | CHNK (43 48 4e 4b) in ASCII                                        |
-| 0x4    | 0x1          | MC Version Major | Minecraft version for the chunks, major part (aka 1.16.0 => 16)    |
-| 0x5    | 0x1          | MC Version Minor | Minecraft version for the chunks, minor part (aka 1.16.0 => 0)     |
-| 0x6    | 0x4          | X Position       | X Position of the region file                                      |
-| 0xA    | 0x4          | Y Position       | Y Position of the region file                                      |
-| 0xE    | 0x1800       | Chunk Info x1024 | Chunk locations and sizes in the file (see Chunk Info below)       |
-| 0x180E | -            | Chunk Data       | Sparse chunk data, referenced by Chunk Info entries, variable size |
+| Offset | Size (Bytes) | Field              | Purpose                                                                  |
+|--------|--------------|--------------------|--------------------------------------------------------------------------|
+| 0x0    | 0x4          | Magic Number       | CHNK (`43 48 4e 4b`) in ASCII                                            |
+| 0x4    | 0x1          | Prismarine Version | Prismarine format version                                                |
+| 0x5    | 0x2          | MC World Version   | Minecraft world version for the chunks, major part (e.g. 1.16.1 => 2567) |
+| 0x7    | 0x4          | X Position         | X Position of the region file                                            |
+| 0xB    | 0x4          | Y Position         | Y Position of the region file                                            |
+| 0xF    | 0x2000       | Chunk Info x1024   | Chunk locations and sizes in the file (see Chunk Info below)             |
+| 0x200F | -            | Chunk Data         | Sparse chunk data, referenced by Chunk Info entries, variable size       |
 
 ### Chunk Info
-| Offset | Size (Bytes)| Field  | Purpose                                                      |
-|--------|-------------|--------|--------------------------------------------------------------|
-| 0x0   | 0x2          | Offset | Chunk data offset, in sectors of 4KiB, after the File Header |
-| 0x2   | 0x4          | Size   | Chunk data size, in bytes                          |
+| Offset | Size (Bytes) | Field  | Purpose                                                      |
+|--------|--------------|--------|--------------------------------------------------------------|
+| 0x0    | 0x4          | Offset | Chunk data offset, in bytes, after the File Header           |
+| 0x4    | 0x4          | Size   | Chunk data size, in bytes                                    |
 
 ### Chunk Data
-| Offset    | Size (Bytes) | Field             | Purpose                                                                                            |
-|-----------|--------------|-------------------|----------------------------------------------------------------------------------------------------|
-| 0x0       | 0x1          | Features          | BitMask (0: Full Chunk (Ground Up), 1: Includes SkyLight, 2-7: Reserved)                           |
-| 0x1       | 0x2          | BitMask           | Section Bitmask with bits set to 1 for every 16x16x16 chunk section whose data is included in Data |
-| 0x3       | 0x4          | Data Length       | Length of the following Block Data                                                                 |
-| 0x7       | -            | Data              | Block Data                                                                                         |
-| Unk+0x7   | 0x9          | Light Bit Masks   | SkyLight Mask, BlockLight Mask, Empty SkyLight Mask, Empty BlockLight Mask, each 18 bits           |
-| Unk+0x10  | 0x4          | Light Data Length | Length of the following Light Data (missing for versions 1.13 and below)                           |
-| Unk+0x14  | -            | Light Data        | Light Data (missing for versions 1.13 and below)                                                   |
-| Unk2+0x14 | 0x1000       | Biomes            | 1024 Biome IDs (missing for versions 1.14 and below)                                               |
+| Offset    | Size (Bytes) | Field             | Purpose                                                                                                                                 |
+|-----------|--------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 0x0       | 0x1          | Compression       | If the rest of the data is GZip compressed or not                                                                                       |
+| 0x1       | 0x1          | Features          | BitMask (0: Full Chunk (Ground Up), 1: Includes SkyLight, 2-7: Reserved)                                                                |
+| 0x2       | 0x2          | BitMask           | Section Bitmask with bits set to 1 for every 16x16x16 chunk section whose data is included in Data                                      |
+| 0x4       | 0x4          | Data Length       | Length of the following Block Data                                                                                                      |
+| 0x8       | -            | Data              | Block Data                                                                                                                              |
+| Unk+0x8   | 0x9          | Light Bit Masks   | SkyLight Mask, BlockLight Mask, Empty SkyLight Mask, Empty BlockLight Mask, each 18 bits (missing for versions 1.13 and below)          |
+| Unk+0x11  | 0x4          | Light Data Length | Length of the following Light Data (missing for versions 1.13 and below)                                                                |
+| Unk+0x15  | -            | Light Data        | Light Data (missing for versions 1.13 and below)                                                                                        |
+| Unk2+0x15 | 0x1000       | Biomes            | 1024 Biome IDs (missing for versions 1.14 and below)                                                                                    |
