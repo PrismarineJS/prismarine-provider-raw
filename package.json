@@ -1,7 +1,7 @@
 {
-  "name": "prismarine-template",
-  "version": "1.0.0",
-  "description": "A template repository to make it easy to create new prismarine repo",
+  "name": "prismarine-provider-raw",
+  "version": "0.0.1",
+  "description": "Raw Storage Provider implementation",
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose",
@@ -12,21 +12,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PrismarineJS/prismarine-template.git"
+    "url": "git+https://github.com/IdanHo/prismarine-provider-raw.git"
   },
   "keywords": [
     "prismarine",
-    "template"
+    "provider",
+    "chunk",
+    "minecraft"
   ],
-  "author": "Romain Beaumont",
+  "author": "Idan Horowitz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PrismarineJS/prismarine-template/issues"
+    "url": "https://github.com/IdanHo/prismarine-provider-raw/issues"
   },
-  "homepage": "https://github.com/PrismarineJS/prismarine-template#readme",
+  "homepage": "https://github.com/IdanHo/prismarine-provider-raw#readme",
   "devDependencies": {
-    "jest": "^26.1.0",
+    "jest": "^26.2.2",
     "require-self": "^0.2.3",
     "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "prismarine-chunk": "^1.20.2"
   }
 }
