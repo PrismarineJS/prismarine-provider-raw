@@ -32,6 +32,8 @@
     "standard": "^14.3.4"
   },
   "dependencies": {
-    "prismarine-chunk": "^1.20.2"
+    "minecraft-data": "^2.63.0",
+    "prismarine-chunk": "^1.20.2",
+    "smart-buffer": "^4.1.0"
   }
 }

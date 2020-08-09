@@ -3,15 +3,14 @@ const Chunk = require('prismarine-chunk')('1.16.1')
 
 const storage = new RawStorage('./world/')
 
-storage.load(0, 1).then(c => {
-  console.log('loaded!')
-}).catch(e => {
-  console.error(e.stack)
-})
-
 const chunk = new Chunk()
-storage.save(-1, 0, chunk).then(c => {
+storage.save(0, 1, chunk).then(() => {
   console.log('saved!')
+  storage.load(0, 1).then(c => {
+    console.log('loaded!')
+  }).catch(e => {
+    console.error(e.stack)
+  })
 }).catch(e => {
   console.error(e.stack)
 })
