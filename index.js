@@ -1,6 +1,7 @@
 const path = require('path')
 const RegionFile = require('./lib/region')
 const fs = require('fs')
+const assert = require('assert').strict
 
 const { LightSeparated, BiomesSeparated } = require('./lib/shared_constants')
 const FULL_CHUNK = 0x1
@@ -9,6 +10,8 @@ const SKYLIGHT_SENT = 0x2
 module.exports = (mcVersion) => {
   const Chunk = require('prismarine-chunk')(mcVersion)
   const worldVersion = require('minecraft-data').versions.pc.find(x => x.minecraftVersion === mcVersion).dataVersion
+
+  assert.ok(typeof worldVersion === 'number', 'Invalid world version!')
 
   class RawStorage {
     constructor (path, compress = true) {
@@ -53,7 +56,7 @@ module.exports = (mcVersion) => {
     async save (x, z, chunk) {
       const region = await this.getRegion(x, z)
       const rawChunk = {
-        features: FULL_CHUNK /* No way to check this in pchunk right now */ | (chunk.skyLightSent ? SKYLIGHT_SENT : 0),
+        features: FULL_CHUNK /* No way to check this in pchunk right now */ | (chunk.skyLightSent === undefined /* Some versions of pchunk dont store this, needs to be fixed */ || chunk.skyLightSent ? SKYLIGHT_SENT : 0),
         bitMask: chunk.getMask(),
         data: chunk.dump()
       }
@@ -72,6 +75,12 @@ module.exports = (mcVersion) => {
         })
       }
       await region.write(x & 31, z & 31, rawChunk, this.compress)
+    }
+
+    async close () {
+      for (const region of Object.values(this.regions)) {
+        await region.close()
+      }
     }
   }
 
