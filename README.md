@@ -51,15 +51,15 @@ const regionY = chunkY >> 5
 ```
 
 ### File Header
-| Offset | Size (Bytes) | Field              | Purpose                                                                                                                                                         |
-|--------|--------------|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 0x0    | 0x4          | Magic Number       | CHNK (`43 48 4e 4b`) in ASCII                                                                                                                                   |
-| 0x4    | 0x1          | Prismarine Version | Prismarine format version                                                                                                                                       |
-| 0x5    | 0x2          | MC World Version   | Minecraft [data version](https://github.com/PrismarineJS/minecraft-data/blob/master/data/pc/common/protocolVersions.json) for the chunks (e.g. 1.16.1 => 2567) |
-| 0x7    | 0x4          | X Position         | X Position of the region file                                                                                                                                   |
-| 0xB    | 0x4          | Y Position         | Y Position of the region file                                                                                                                                   |
-| 0xF    | 0x2000       | Chunk Info x1024   | Chunk locations and sizes in the file (see Chunk Info below)                                                                                                    |
-| 0x200F | -            | Chunk Data         | Sparse chunk data, referenced by Chunk Info entries, variable size                                                                                              |
+| Offset | Size (Bytes) | Field              | Purpose                                                                                                                                                           |
+|--------|--------------|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0x0    | 0x4          | Magic Number       | CHNK (`43 48 4e 4b`) in ASCII                                                                                                                                     |
+| 0x4    | 0x1          | Prismarine Version | Prismarine format version                                                                                                                                         |
+| 0x5    | 0x2          | MC World Version   | Minecraft [protocol version](https://github.com/PrismarineJS/minecraft-data/blob/master/data/pc/common/protocolVersions.json) for the chunks (e.g. 1.16.1 => 736) |
+| 0x7    | 0x4          | X Position         | X Position of the region file                                                                                                                                     |
+| 0xB    | 0x4          | Y Position         | Y Position of the region file                                                                                                                                     |
+| 0xF    | 0x2000       | Chunk Info x1024   | Chunk locations and sizes in the file (see Chunk Info below)                                                                                                      |
+| 0x200F | -            | Chunk Data         | Sparse chunk data, referenced by Chunk Info entries, variable size                                                                                                |
 
 
 ### Chunk Info

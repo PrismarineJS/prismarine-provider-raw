@@ -4,8 +4,7 @@ const assert = require('assert').strict
 const { Vec3 } = require('vec3')
 const rimraf = require('rimraf')
 
-/* 1.8.9 is not tested right now as its missing a world version in minecraft-data */
-const testedVersions = ['1.9.4', '1.10.2', '1.11.2', '1.12.2', '1.13.2', '1.14.4', '1.15.2', '1.16.1']
+const testedVersions = ['1.8.9', '1.9.4', '1.10.2', '1.11.2', '1.12.2', '1.13.2', '1.14.4', '1.15.2', '1.16.1']
 
 describe.each(testedVersions)('saving and loading %s', version => {
   const Chunk = require('prismarine-chunk')(version)

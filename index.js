@@ -9,7 +9,7 @@ const SKYLIGHT_SENT = 0x2
 
 module.exports = (mcVersion) => {
   const Chunk = require('prismarine-chunk')(mcVersion)
-  const worldVersion = require('minecraft-data').versions.pc.find(x => x.minecraftVersion === mcVersion).dataVersion
+  const worldVersion = require('minecraft-data').versions.pc.find(x => x.minecraftVersion === mcVersion).version
 
   assert.ok(typeof worldVersion === 'number', 'Invalid world version!')
 
