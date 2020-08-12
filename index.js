@@ -45,6 +45,7 @@ module.exports = (mcVersion) => {
     async load (x, z) {
       const region = await this.getRegion(x, z)
       const rawChunk = await region.read(x & 31, z & 31)
+      if (rawChunk == null) return null
       const chunk = new Chunk()
       chunk.load(rawChunk.data, rawChunk.bitMask, (rawChunk.features & SKYLIGHT_SENT) !== 0, (rawChunk.features & FULL_CHUNK) !== 0)
       if (worldVersion >= LightSeparated) chunk.loadLight(rawChunk.lightData, rawChunk.skyLightMask, rawChunk.blockLightMask, rawChunk.emptySkyLightMask, rawChunk.emptyBlockLightMask)

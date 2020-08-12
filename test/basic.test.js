@@ -10,6 +10,18 @@ describe.each(testedVersions)('saving and loading %s', version => {
   const Chunk = require('prismarine-chunk')(version)
   const RawStorage = require('../')(version)
 
+  describe('error handling', () => {
+    afterAll(done => {
+      rimraf(path, done)
+    })
+
+    it('reading an unsaved chunk returns null', async () => {
+      const rawStorage = new RawStorage(path)
+      assert.equal(await rawStorage.load(0, 0), null)
+      await rawStorage.close()
+    })
+  })
+
   function generateRandomChunk (chunkX, chunkZ) {
     const chunk = new Chunk()
 
