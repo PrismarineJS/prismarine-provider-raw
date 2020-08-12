@@ -1,6 +1,6 @@
 {
   "name": "prismarine-provider-raw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Raw Storage Provider implementation",
   "main": "index.js",
   "scripts": {

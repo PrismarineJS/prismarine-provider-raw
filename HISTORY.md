@@ -1,5 +1,9 @@
 ## History
 
+### 1.0.1
+
+* fix load throwing instead of returning null when a chunk that is not saved is loaded
+
 ### 1.0.0
 
 * first actual version
