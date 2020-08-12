@@ -56,7 +56,7 @@ module.exports = (mcVersion) => {
     async save (x, z, chunk) {
       const region = await this.getRegion(x, z)
       const rawChunk = {
-        features: FULL_CHUNK /* No way to check this in pchunk right now */ | (chunk.skyLightSent === undefined /* Some versions of pchunk dont store this, needs to be fixed */ || chunk.skyLightSent ? SKYLIGHT_SENT : 0),
+        features: FULL_CHUNK /* No way to check this in pchunk right now */ | (worldVersion >= LightSeparated || chunk.skyLightSent ? SKYLIGHT_SENT : 0),
         bitMask: chunk.getMask(),
         data: chunk.dump()
       }
