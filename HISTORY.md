@@ -1,5 +1,10 @@
 ## History
 
+### 1.1.0
+
+* allow defragging of stored region files
+* optimize initial region file loading
+
 ### 1.0.1
 
 * fix load throwing instead of returning null when a chunk that is not saved is loaded
