@@ -97,6 +97,12 @@ describe.each(testedVersions)('saving and loading %s', version => {
       await rawStorage.close()
     })
 
+    it('defrag the world', async () => {
+      const rawStorage = new RawStorage(path)
+      await rawStorage.defrag()
+      await rawStorage.close()
+    })
+
     it('load the world correctly in parallel', async () => {
       await loadInParallel(chunks)
     })
@@ -119,6 +125,12 @@ describe.each(testedVersions)('saving and loading %s', version => {
     it('save the world in parallel', async () => {
       const rawStorage = new RawStorage(path)
       await Promise.all(chunks.map(({ chunkX, chunkZ, chunk }) => rawStorage.save(chunkX, chunkZ, chunk)))
+      await rawStorage.close()
+    })
+
+    it('defrag the world', async () => {
+      const rawStorage = new RawStorage(path)
+      await rawStorage.defrag()
       await rawStorage.close()
     })
 

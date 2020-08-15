@@ -83,6 +83,32 @@ module.exports = (mcVersion) => {
         await region.close()
       }
     }
+
+    async defrag () {
+      const regionFiles = (await fs.promises.readdir(this.path)).filter(n => n.endsWith('.chnk')) // get list of all stored region files
+
+      const toClose = []
+
+      for (const regionFile of regionFiles) { // preload all missing region files
+        const fullPath = path.join(this.path, regionFile)
+        if (this.regions[fullPath] === undefined) {
+          const region = new RegionFile(fullPath)
+          this.regions[fullPath] = region
+          const fileNameParts = regionFile.split('.')
+          await region.initialize(worldVersion, parseInt(fileNameParts[1] << 5), parseInt(fileNameParts[2]) << 5)
+          toClose.push(fullPath)
+        }
+      }
+
+      for (const region of Object.values(this.regions)) { // defrag each region
+        await region.defrag()
+      }
+
+      for (const regionName of toClose) { // free regions that were only needed for defragging
+        this.regions[regionName].close()
+        delete this.regions[regionName]
+      }
+    }
   }
 
   return RawStorage

@@ -42,6 +42,11 @@ Store a prismarine-chunk `chunk` at pos `x`, `y`. Returns a promise.
 #### RawStorage.load(x, z)
 Load the prismarine-chunk at pos `x`, `y`. Returns a promise.
 
+#### RawStorage.defrag()
+Load and defrag all region files (reduces wasted storage space)
+
+NOTE: there is no need to run this regularly
+
 ## Format
 The format is loosely based on minecraft's Anvil Region format. The world is divided into 32*32 (1024) chunk sections, called 'regions'.
 The region a chunk belongs to can be found by dividing and then flooring the chunk coordinates by 32 (Bit-shift right by 5):
