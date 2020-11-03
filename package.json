@@ -30,7 +30,7 @@
     "jest": "^26.2.2",
     "require-self": "^0.2.3",
     "rimraf": "^3.0.2",
-    "standard": "^14.3.4",
+    "standard": "^16.0.1",
     "vec3": "^0.1.6"
   },
   "dependencies": {
