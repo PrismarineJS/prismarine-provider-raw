@@ -11,7 +11,7 @@ for (const version of testedVersions) {
   const RawStorage = require('../')(version)
 
   describe(version + ' error handling', () => {
-    afterAll(done => {
+    after(done => {
       rimraf(path, done)
     })
 
