@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose",
-    "pretest": "npm run lint && require-self",
-    "prepare": "npm install require-self && require-self",
+    "pretest": "npm run lint",
     "lint": "standard",
     "fix": "standard --fix"
   },
@@ -28,13 +27,12 @@
   "homepage": "https://github.com/IdanHo/prismarine-provider-raw#readme",
   "devDependencies": {
     "jest": "^27.0.4",
-    "require-self": "^0.2.3",
     "rimraf": "^3.0.2",
     "standard": "^16.0.1",
     "vec3": "^0.1.6"
   },
   "dependencies": {
-    "minecraft-data": "^2.63.0",
+    "minecraft-data": "^3.90.0",
     "prismarine-chunk": "^1.20.3",
     "smart-buffer": "^4.1.0"
   }
