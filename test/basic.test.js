@@ -1,4 +1,4 @@
-/* eslint-env jest */
+/* eslint-env mocha */
 
 const assert = require('assert').strict
 const { Vec3 } = require('vec3')
