@@ -6,7 +6,7 @@ const rimraf = require('rimraf')
 
 const testedVersions = ['1.8.9', '1.9.4', '1.10.2', '1.11.2', '1.12.2', '1.13.2', '1.14.4', '1.15.2', '1.16.1']
 
-describe.each(testedVersions)('saving and loading %s', version => {
+for (const version of trustedVersions) {
   const Chunk = require('prismarine-chunk')(version)
   const RawStorage = require('../')(version)
 
@@ -138,7 +138,7 @@ describe.each(testedVersions)('saving and loading %s', version => {
       await loadInParallel(chunks)
     })
   })
-}, 60 * 1000)
+}
 
 function range (n) {
   return [...Array(n).keys()]
