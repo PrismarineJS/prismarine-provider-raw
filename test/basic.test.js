@@ -1,4 +1,4 @@
-/* eslint-env jest */
+/* eslint-env mocha */
 
 const assert = require('assert').strict
 const { Vec3 } = require('vec3')
@@ -6,12 +6,12 @@ const rimraf = require('rimraf')
 
 const testedVersions = ['1.8.9', '1.9.4', '1.10.2', '1.11.2', '1.12.2', '1.13.2', '1.14.4', '1.15.2', '1.16.1']
 
-describe.each(testedVersions)('saving and loading %s', version => {
+for (const version of testedVersions) {
   const Chunk = require('prismarine-chunk')(version)
   const RawStorage = require('../')(version)
 
-  describe('error handling', () => {
-    afterAll(done => {
+  describe(version + ' error handling', () => {
+    after(done => {
       rimraf(path, done)
     })
 
@@ -74,9 +74,9 @@ describe.each(testedVersions)('saving and loading %s', version => {
     await rawStorage.close()
   }
 
-  describe('in sequence', () => {
+  describe(version + ' in sequence', () => {
     let chunks = {}
-    beforeAll(() => {
+    before(() => {
       chunks = generateCube(size).map(({ chunkX, chunkZ }) => ({
         chunkX,
         chunkZ,
@@ -84,7 +84,7 @@ describe.each(testedVersions)('saving and loading %s', version => {
       }))
     })
 
-    afterAll(done => {
+    after(done => {
       rimraf(path, done)
     })
 
@@ -108,9 +108,9 @@ describe.each(testedVersions)('saving and loading %s', version => {
     })
   })
 
-  describe('in parallel', () => {
+  describe(version + ' in parallel', () => {
     let chunks = {}
-    beforeAll(() => {
+    before(() => {
       chunks = generateCube(size).map(({ chunkX, chunkZ }) => ({
         chunkX,
         chunkZ,
@@ -118,7 +118,7 @@ describe.each(testedVersions)('saving and loading %s', version => {
       }))
     })
 
-    afterAll(done => {
+    after(done => {
       rimraf(path, done)
     })
 
@@ -138,7 +138,7 @@ describe.each(testedVersions)('saving and loading %s', version => {
       await loadInParallel(chunks)
     })
   })
-}, 60 * 1000)
+}
 
 function range (n) {
   return [...Array(n).keys()]
