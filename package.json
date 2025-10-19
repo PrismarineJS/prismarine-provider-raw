@@ -4,7 +4,7 @@
   "description": "Raw Storage Provider implementation",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
+    "test": "mocha",
     "pretest": "npm run lint",
     "lint": "standard",
     "fix": "standard --fix"
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/IdanHo/prismarine-provider-raw#readme",
   "devDependencies": {
-    "jest": "^27.0.4",
+    "mocha": "^11.0.0",
     "rimraf": "^3.0.2",
     "standard": "^16.0.1",
     "vec3": "^0.1.6"
