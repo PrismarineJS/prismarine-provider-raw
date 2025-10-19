@@ -10,7 +10,7 @@ for (const version of testedVersions) {
   const Chunk = require('prismarine-chunk')(version)
   const RawStorage = require('../')(version)
 
-  describe('error handling', () => {
+  describe(version + ' error handling', () => {
     afterAll(done => {
       rimraf(path, done)
     })
@@ -74,9 +74,9 @@ for (const version of testedVersions) {
     await rawStorage.close()
   }
 
-  describe('in sequence', () => {
+  describe(version + ' in sequence', () => {
     let chunks = {}
-    beforeAll(() => {
+    before(() => {
       chunks = generateCube(size).map(({ chunkX, chunkZ }) => ({
         chunkX,
         chunkZ,
@@ -84,7 +84,7 @@ for (const version of testedVersions) {
       }))
     })
 
-    afterAll(done => {
+    after(done => {
       rimraf(path, done)
     })
 
@@ -108,9 +108,9 @@ for (const version of testedVersions) {
     })
   })
 
-  describe('in parallel', () => {
+  describe(version + ' in parallel', () => {
     let chunks = {}
-    beforeAll(() => {
+    before(() => {
       chunks = generateCube(size).map(({ chunkX, chunkZ }) => ({
         chunkX,
         chunkZ,
@@ -118,7 +118,7 @@ for (const version of testedVersions) {
       }))
     })
 
-    afterAll(done => {
+    after(done => {
       rimraf(path, done)
     })
 
