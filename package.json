@@ -31,7 +31,7 @@
     "require-self": "^0.2.3",
     "rimraf": "^3.0.2",
     "standard": "^16.0.1",
-    "vec3": "^0.1.6"
+    "vec3": "^0.2.0"
   },
   "dependencies": {
     "minecraft-data": "^2.63.0",
